@@ -2,10 +2,10 @@
 <html lang="it">
   <head>
     <meta charset="UTF-8" />
-    <title>Mappa IP</title>
+    <title>Mappa Devices</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css?v=1.0.0" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"
@@ -29,20 +29,14 @@
         attribution: '© OpenStreetMap contributors'
       }).addTo(map);
 
-      // Inizializza il cluster group
+      // Inizializza il cluster group con le opzioni per disabilitare lo zoom sul gruppo
       const markers = L.markerClusterGroup({
-        disableClusteringAtZoom: 100  // Mai disabilitare il clustering automaticamente
-      });
-
-      // Disabilita il click sui cluster
-      markers.on('clusterclick', function (a) {
-        a.originalEvent.preventDefault(); // Evita comportamenti predefiniti
-        a.originalEvent.stopPropagation(); // Impedisce la propagazione
+        spiderfyOnMaxZoom: false, // Disabilita lo "spiderfy" quando si fa zoom
+        zoomToBoundsOnClick: false // Disabilita lo zoom sul gruppo quando viene cliccato
       });
 
       locations.forEach(loc => {
-        const marker = L.marker([loc.lat, loc.lon])
-          .bindPopup(`<b>${loc.city}</b><br>${loc.country}<br>${loc.ip}`);
+        const marker = L.marker([loc.lat, loc.lon]); // Non associamo il popup
         markers.addLayer(marker);
       });
 
