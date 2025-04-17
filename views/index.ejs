@@ -23,7 +23,7 @@
     <script>
       const locations = <%- JSON.stringify(locations) %>;
 
-      const map = L.map('map',{maxZoom: 10}).setView([45.4, 9.1], 8);
+      const map = L.map('map',{maxZoom: 12}).setView([45.4, 9.1], 8);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
@@ -32,6 +32,12 @@
       // Inizializza il cluster group
       const markers = L.markerClusterGroup({
         disableClusteringAtZoom: 100  // Mai disabilitare il clustering automaticamente
+      });
+
+      // Disabilita il click sui cluster
+      markers.on('clusterclick', function (a) {
+        a.originalEvent.preventDefault(); // Evita comportamenti predefiniti
+        a.originalEvent.stopPropagation(); // Impedisce la propagazione
       });
 
       locations.forEach(loc => {
