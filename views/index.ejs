@@ -23,7 +23,7 @@
     <script>
       const locations = <%- JSON.stringify(locations) %>;
 
-      const map = L.map('map',{maxZoom: 2}).setView([45.4, 9.1], 8);
+      const map = L.map('map',{maxZoom: 10}).setView([45.4, 9.1], 8);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
