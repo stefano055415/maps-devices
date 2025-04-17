@@ -30,7 +30,9 @@
       }).addTo(map);
 
       // Inizializza il cluster group
-      const markers = L.markerClusterGroup();
+      const markers = L.markerClusterGroup({
+        disableClusteringAtZoom: 100  // Mai disabilitare il clustering automaticamente
+      });
 
       locations.forEach(loc => {
         const marker = L.marker([loc.lat, loc.lon])
